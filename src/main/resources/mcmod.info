@@ -1,0 +1,16 @@
+[
+{
+  "modid": "multifarmcrops",
+  "name": "Multifarm Crops",
+  "description": "Allows Forestry Multifarms to Harvest Agricraft Crops",
+  "version": "1.0.1",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["mallrat208"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
