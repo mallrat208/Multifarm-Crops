@@ -16,15 +16,15 @@ import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmable;
 import forestry.farming.logic.CropBasicAgriCraft;
 
-public class FarmableMFCAgricraftCrop implements IFarmable {
+import com.infinityraider.agricraft.tiles.TileEntityCrop;
 
-	@GameRegistry.ObjectHolder("agricraft:crop")
-	public static final Block cropBlock = null;
+public class FarmableMFCAgricraftCrop implements IFarmable {
 
 	@Override
 	public boolean isSaplingAt(World world, BlockPos blockPos) {
 
-		return cropBlock.equals(world.getBlockState(blockPos).getBlock());
+		TileEntity tileEntity = world.getTileEntity(blockPos);
+		return tileEntity instanceof TileEntityCrop;
 	}
 
 	@Nullable

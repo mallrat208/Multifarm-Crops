@@ -27,18 +27,13 @@ public class PluginAgricraft extends BlankForestryPlugin{
 
 	@Override
 	public String getFailMessage() {
-		return "Agricraft not Found";
-	}
-
-	@Override
-	public void preInit() {
-
-
+		return "AgriCraft not Found";
 	}
 
 	@Override
 	public void doInit() {
 
+		MultifarmCrops.parseTraversableBlocks();
 		farmLogicAgricraft = new CircuitFarmLogic("manualAgricraft",new FarmLogicAgriCrop()).setManual();
 	}
 

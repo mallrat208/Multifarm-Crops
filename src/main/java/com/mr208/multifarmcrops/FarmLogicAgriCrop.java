@@ -2,19 +2,14 @@ package com.mr208.multifarmcrops;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+
 import forestry.api.farming.Farmables;
 import forestry.api.farming.IFarmable;
 import forestry.farming.logic.FarmLogicOrchard;
@@ -29,14 +24,17 @@ public class FarmLogicAgriCrop extends FarmLogicOrchard {
 	private final ImmutableList<Block> traversalBlocks;
 
 
-	public FarmLogicAgriCrop() {
-		this.farmables = Farmables.farmables.get("farmAgricraft");
 
+	public FarmLogicAgriCrop() {
+
+		this.farmables = Farmables.farmables.get("farmAgricraft");
 		ImmutableList.Builder<Block> traversalBlocksBuilder = ImmutableList.builder();
-		traversalBlocksBuilder.add(Blocks.FARMLAND);
-		traversalBlocksBuilder.add(Blocks.GRAVEL);
+		for(Block traversable:MultifarmCrops.traversableBlock) {
+			traversalBlocksBuilder.add(traversable);
+		}
 		traversalBlocksBuilder.build();
 		this.traversalBlocks = traversalBlocksBuilder.build();
+
 	}
 
 	@Override
@@ -49,8 +47,6 @@ public class FarmLogicAgriCrop extends FarmLogicOrchard {
 		return (int) (15 * hydrationModifier);
 	}
 
-
-
 	@Override
 	public ItemStack getIconItemStack() {
 		return new ItemStack(AgriItems.getInstance().CROPS);
@@ -58,6 +54,6 @@ public class FarmLogicAgriCrop extends FarmLogicOrchard {
 
 	@Override
 	public String getName() {
-		return "Agricraft Crops";
+		return "AgriCraft Crops";
 	}
 }
