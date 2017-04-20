@@ -2,6 +2,8 @@ package com.mr208.multifarmcrops;
 
 import javax.annotation.Nullable;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,12 +21,15 @@ import forestry.farming.logic.CropBasicAgriCraft;
 import com.infinityraider.agricraft.tiles.TileEntityCrop;
 
 public class FarmableMFCAgricraftCrop implements IFarmable {
+	@GameRegistry.ObjectHolder("agricraft:crop")
+	public static final Block cropBlock = null;
+
+	public FarmableMFCAgricraftCrop() {}
 
 	@Override
 	public boolean isSaplingAt(World world, BlockPos blockPos) {
 
-		TileEntity tileEntity = world.getTileEntity(blockPos);
-		return tileEntity instanceof TileEntityCrop;
+		return cropBlock.equals(world.getBlockState(blockPos).getBlock());
 	}
 
 	@Nullable

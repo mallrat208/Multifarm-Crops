@@ -2,9 +2,10 @@ package com.mr208.multifarmcrops;
 
 import javax.annotation.Nonnull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import net.minecraft.block.Block;
+import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,15 +14,16 @@ import forestry.core.proxy.Proxies;
 import forestry.farming.logic.Crop;
 import com.infinityraider.agricraft.tiles.TileEntityCrop;
 
-
 public class CropMFCAgricraftCrop extends Crop {
 
 	private TileEntity tileEntityCrop;
+	private static Random random;
 
 
 	protected CropMFCAgricraftCrop(@Nonnull World world, @Nonnull BlockPos position) {
 		super(world, position);
 		tileEntityCrop = world.getTileEntity(position);
+		random = new Random();
 	}
 
 	@Override
@@ -38,10 +40,7 @@ public class CropMFCAgricraftCrop extends Crop {
 	}
 
 	public static boolean isAgricraftCrop(TileEntity tileEntity) {
-		if(tileEntity instanceof TileEntityCrop) {
-			return true;
-		}
-		return false;
+		return tileEntity instanceof TileEntityCrop;
 	}
 
 	public static boolean canHarvestCrop(TileEntity tileEntity) {
@@ -58,26 +57,16 @@ public class CropMFCAgricraftCrop extends Crop {
 	private static List<ItemStack> getCropDrops(TileEntity tileEntity) {
 		if(isAgricraftCrop(tileEntity)) {
 			TileEntityCrop crop = (TileEntityCrop) tileEntity;
-			Block block = crop.getBlockType();
-
-			List<ItemStack> harvestResults = block.getDrops(tileEntity.getWorld(),tileEntity.getPos(),((TileEntityCrop) tileEntity).getState(), 0);
-
-			if(harvestResults.size() > 1) {
-				harvestResults.remove(1);
+			List<ItemStack> harvestResults;
+			harvestResults = new ArrayList<>();
+			crop.getFruits((harvestResults::add),random);
+			List<ItemStack> filteredList = new ArrayList<>();
+			for(ItemStack stack: harvestResults) {
+				if(stack!=null) filteredList.add(stack);
 			}
-			harvestResults.remove(0);
-
-
 			Proxies.common.addBlockDestroyEffects(tileEntity.getWorld(),tileEntity.getPos(),((TileEntityCrop) tileEntity).getState());
-
 			crop.setGrowthStage(0);
-
-			//Check for Lists with null itemstacks. I hates them.
-			if(harvestResults.get(0) == null) {
-				return null;
-			}
-
-			return harvestResults;
+			return filteredList.isEmpty()? null: filteredList;
 		}
 		return null;
 	}

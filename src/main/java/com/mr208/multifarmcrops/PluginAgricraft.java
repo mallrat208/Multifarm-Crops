@@ -32,14 +32,11 @@ public class PluginAgricraft extends BlankForestryPlugin{
 
 	@Override
 	public void doInit() {
-
-		MultifarmCrops.parseTraversableBlocks();
 		farmLogicAgricraft = new CircuitFarmLogic("manualAgricraft",new FarmLogicAgriCrop()).setManual();
 	}
 
 	@Override
 	public void registerRecipes() {
-
 		ICircuitLayout layoutManual = ChipsetManager.circuitRegistry.getLayout("forestry.farms.manual");
 		ChipsetManager.solderManager.addRecipe(layoutManual,PluginCore.items.tubes.get(EnumElectronTube.EMERALD,1),farmLogicAgricraft);
 
