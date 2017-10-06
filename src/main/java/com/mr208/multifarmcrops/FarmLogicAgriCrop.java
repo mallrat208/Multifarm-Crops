@@ -1,8 +1,5 @@
 package com.mr208.multifarmcrops;
 
-import com.google.common.collect.ImmutableList;
-
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,26 +10,18 @@ import java.util.Stack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import forestry.api.farming.FarmDirection;
 import forestry.api.farming.Farmables;
 import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmHousing;
 import forestry.api.farming.IFarmable;
-import forestry.api.genetics.IFruitBearer;
-import forestry.farming.logic.CropFruit;
 import forestry.farming.logic.FarmLogic;
 
 import com.infinityraider.agricraft.init.AgriItems;
-import com.infinityraider.agricraft.tiles.TileEntityCrop;
-
 
 public class FarmLogicAgriCrop extends FarmLogic {
 
@@ -89,7 +78,7 @@ public class FarmLogicAgriCrop extends FarmLogic {
 	}
 
 	@Override
-	public boolean cultivate(World world, IFarmHousing iFarmHousing, BlockPos blockPos, FarmDirection farmDirection, int i) {
+	public boolean cultivate(World world, IFarmHousing iFarmHousing, BlockPos blockPos, FarmDirection farmDirection, int extent) {
 		return false;
 	}
 
@@ -107,7 +96,6 @@ public class FarmLogicAgriCrop extends FarmLogic {
 	public String getName() {
 		return "AgriCraft Crops";
 	}
-
 
 	private Collection<ICrop> getHarvestBlocks(World world, BlockPos position) {
 		Set<BlockPos> seen = new HashSet<>();
@@ -137,17 +125,14 @@ public class FarmLogicAgriCrop extends FarmLogic {
 
 		List<BlockPos> candidates = new ArrayList<>();
 
-		for (int j = 0; j < 2; j++) {
-
+		for (int j = 0; j < 3; j++) {
 			BlockPos candidate = position.up(j);
-
 			if (seen.contains(candidate)) {
 				continue;
 			}
 			if (world.isAirBlock(candidate)) {
 				continue;
 			}
-
 			IBlockState blockState = world.getBlockState(candidate);
 			Block block = blockState.getBlock();
 

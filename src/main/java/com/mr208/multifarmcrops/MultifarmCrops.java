@@ -9,8 +9,8 @@ public class MultifarmCrops {
 
 	public static final String MOD_ID = "multifarmcrops";
 	public static final String MOD_NAME = "Multifarm Crops";
-	public static final String MOD_VERSION = "1.1.0";
-	public static final String MOD_DEPENDENCIES = "required-after:forestry;required-after:agricraft";
+	public static final String MOD_VERSION = "1.1.2";
+	public static final String MOD_DEPENDENCIES = "required-after:Forge@[12.18.3.2185,);required-after:forestry;required-after:agricraft@[0-0.10.0-a20,)";
 
 	public static final Logger logger = LogManager.getLogger(MOD_ID);
 

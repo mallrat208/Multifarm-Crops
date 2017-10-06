@@ -37,20 +37,14 @@ public class FarmableMFCAgricraftCrop implements IFarmable {
 	public ICrop getCropAt(World world, BlockPos blockPos, IBlockState iBlockState) {
 
 		TileEntity crop = world.getTileEntity(blockPos);
-
 		if(crop == null) {
 			return null;
-		}
-
-		if(!CropMFCAgricraftCrop.isAgricraftCrop(crop)) {
+		} else if(!CropMFCAgricraftCrop.isAgricraftCrop(crop)) {
 			return null;
-		}
-
-		if(!CropMFCAgricraftCrop.canHarvestCrop(crop)) {
+		} else if(!CropMFCAgricraftCrop.canHarvestCrop(crop)) {
 			return null;
-		}
-
-		return new CropMFCAgricraftCrop(world,blockPos);
+		} else
+			return new CropMFCAgricraftCrop(world,blockPos);
 	}
 
 	@Override
